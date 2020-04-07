@@ -15,6 +15,7 @@ import io.netty.handler.logging.LoggingHandler;
  */
 public final class Server {
     public  static void main(String[] args) throws Exception {
+        //主从 reactor
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

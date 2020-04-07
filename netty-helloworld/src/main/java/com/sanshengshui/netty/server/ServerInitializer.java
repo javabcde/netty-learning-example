@@ -26,6 +26,7 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(ENCODER);
 
         // and then business logic.
+        //业务处理
         pipeline.addLast(SERVER_HANDLER);
     }
 }
