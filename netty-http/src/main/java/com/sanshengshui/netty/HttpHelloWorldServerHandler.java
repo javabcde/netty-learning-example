@@ -66,6 +66,7 @@ public class HttpHelloWorldServerHandler extends SimpleChannelInboundHandler<Htt
             if (method.equals(HttpMethod.GET)){
                 QueryStringDecoder queryDecoder = new QueryStringDecoder(uri, Charsets.toCharset(CharEncoding.UTF_8));
                 Map<String, List<String>> uriAttributes = queryDecoder.parameters();
+                //获取http get请求参数
                 //此处仅打印请求参数（你可以根据业务需求自定义处理）
                 for (Map.Entry<String, List<String>> attr : uriAttributes.entrySet()) {
                     for (String attrVal : attr.getValue()) {
@@ -79,7 +80,6 @@ public class HttpHelloWorldServerHandler extends SimpleChannelInboundHandler<Htt
                 //根据不同的Content_Type处理body数据
                 dealWithContentType();
                 user.setMethod("post");
-
             }
 
             JSONSerializer jsonSerializer = new JSONSerializer();
@@ -91,6 +91,7 @@ public class HttpHelloWorldServerHandler extends SimpleChannelInboundHandler<Htt
 
             boolean keepAlive = HttpUtil.isKeepAlive(request);
             if (!keepAlive) {
+                //没有连接了
                 ctx.write(response).addListener(ChannelFutureListener.CLOSE);
             } else {
                 response.headers().set(CONNECTION, KEEP_ALIVE);
